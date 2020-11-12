@@ -2,7 +2,6 @@ package ua.edu.ucu.tempseries;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import org.junit.Ignore;
 
 public class TemperatureSeriesAnalysisTest {
 
@@ -115,5 +114,28 @@ public class TemperatureSeriesAnalysisTest {
         double[] actualResult = seriesAnalysis.findTempsGreaterThen(2.0);
 
         assertArrayEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void testSummaryStatistics() throws CloneNotSupportedException {
+        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.getAverage(), 1.0, 0.00001);
+        assertEquals(expResult.getDevTemp(), 3.74165739, 0.00001);
+        assertEquals(expResult.getMinTemp(), -5.0, 0.00001);
+        assertEquals(expResult.getMaxTemp(), 5.0, 0.00001);
+    }
+
+    @Test
+    public void testAddTemps() {
+        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        int result = seriesAnalysis.addTemps(6.0, 7.0, -1.0, 12.0);
+        int expResult = 0;
+
+        assertEquals(result, expResult);
     }
 }

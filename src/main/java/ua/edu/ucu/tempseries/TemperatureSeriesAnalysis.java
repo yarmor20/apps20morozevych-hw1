@@ -8,7 +8,7 @@ public class TemperatureSeriesAnalysis {
     private double[] temeperatureSeries;
 
     public TemperatureSeriesAnalysis() {
-
+        this.temeperatureSeries = null;
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
@@ -122,11 +122,16 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() throws CloneNotSupportedException {
-        return (TempSummaryStatistics) super.clone();
+        TempSummaryStatistics tempStats = new TempSummaryStatistics(this);
+        return tempStats.clone();
     }
 
     public int addTemps(double ... temps) {
-        int actualQuantity = temeperatureSeries.length;
+        if (temeperatureSeries.length == 0) {
+            throw new IllegalArgumentException("Array is empty.");
+        }
+
+        int actualQuantity = 0;
         double[] tempSeriesCopy = temeperatureSeries.clone();
 
         for (double temp: temps) {
@@ -143,7 +148,7 @@ public class TemperatureSeriesAnalysis {
         return 0;
     }
 
-    public void reserveSpace (int space) {
+    private void reserveSpace (int space) {
         double[] newTempSeries = new double[space];
         int counter = 0;
 

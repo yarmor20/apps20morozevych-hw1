@@ -1,16 +1,16 @@
 package ua.edu.ucu.tempseries;
 
-public final class TempSummaryStatistics extends TemperatureSeriesAnalysis implements Cloneable {
+public final class TempSummaryStatistics implements Cloneable {
     private final double avgTemp;
     private final double devTemp;
     private final double minTemp;
     private final double maxTemp;
 
-    public TempSummaryStatistics(double temperatures) {
-        this.avgTemp = average();
-        this.devTemp = deviation();
-        this.minTemp = min();
-        this.maxTemp = max();
+    public TempSummaryStatistics(TemperatureSeriesAnalysis tempAnalysis) {
+        this.avgTemp = tempAnalysis.average();
+        this.devTemp = tempAnalysis.deviation();
+        this.minTemp = tempAnalysis.min();
+        this.maxTemp = tempAnalysis.max();
     }
 
     public double getAverage() {
