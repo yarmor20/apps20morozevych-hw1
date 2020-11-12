@@ -76,7 +76,7 @@ public class TemperatureSeriesAnalysis {
         for (double temperature: temeperatureSeries) {
             double stepDistance = Math.abs(tempValue - temperature);
             if (stepDistance < smallestDistance) {
-                if (closestTemp == Math.abs(temperature) && temperature < 0) {
+                if (Math.abs(closestTemp - Math.abs(temperature)) < 0.0001 && temperature < 0.0) {
                     continue;
                 }
                 smallestDistance = stepDistance;
@@ -148,7 +148,7 @@ public class TemperatureSeriesAnalysis {
         return 0;
     }
 
-    private void reserveSpace (int space) {
+    private void reserveSpace(int space) {
         double[] newTempSeries = new double[space];
         int counter = 0;
 
